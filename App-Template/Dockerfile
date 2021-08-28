@@ -1,22 +1,5 @@
-FROM ruby:3.0.1-alpine AS builder
+FROM ruby:3.0.1 AS builder
 LABEL maintainer="Mike Rogers <me@mikerogers.io>"
-
-RUN apk --no-cache add --virtual build-dependencies \
-      build-base \
-      openssl \
-      # Nokogiri Libraries
-      zlib-dev \
-      libxml2-dev \
-      libxslt-dev \
-      # Postgres
-      postgresql-dev \
-      # JavaScript
-      nodejs \
-      yarn \
-      # FFI Bindings in ruby (Run C Commands)
-      libffi-dev \
-      # Fixes watch file issues with things like HMR
-      libnotify-dev
 
 # Dockerize allows us to wait for other containers to be ready before we run our own code.
 ENV DOCKERIZE_VERSION v0.6.1
@@ -25,7 +8,7 @@ RUN wget -nv https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_V
     && rm dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
 # Rails Specific libraries
-RUN apk --no-cache add \
+RUN apt-get update && apt-get install -y \
       # ActiveStorage file inspection
       file \
       # Time zone data
@@ -35,15 +18,18 @@ RUN apk --no-cache add \
       # wkhtmltopdf \
       # Image Resizing
       imagemagick \
-      vips \
       # Nice to have
       bash \
+      postgresql\
+      postgresql-contrib\
       git \
       # VIM is a handy editor for editing credentials
       vim \
       # Allows for mimemagic gem to be installed
       shared-mime-info
-
+RUN curl -sL https://deb.nodesource.com/setup_14.x  | bash -
+RUN apt-get -y install nodejs
+RUN npm install -g yarn
 # Install any extra dependencies via Aptfile - These are installed on Heroku
 # COPY Aptfile /usr/src/app/Aptfile
 # RUN apk add --update $(cat /usr/src/app/Aptfile | xargs)
@@ -64,8 +50,8 @@ ARG USER_ID=${USER_ID:-1000}
 ARG GROUP_ID=${GROUP_ID:-1000}
 
 # Add non-root user and group with alpine first available uid, 1000
-RUN addgroup -g $USER_ID -S appgroup \
-      && adduser -u $GROUP_ID -S appuser -G appgroup
+RUN addgroup --gid $USER_ID --system appgroup \
+      && adduser -u $GROUP_ID --system appuser --ingroup appgroup
 
 # Install multiple gems at the same time
 RUN bundle config set jobs $(nproc)
@@ -126,3 +112,4 @@ RUN RAILS_SERVE_STATIC_FILES=enabled \
       SECRET_KEY_BASE=secret-key-base \
       bundle exec rake assets:precompile \
       && bundle exec bootsnap precompile --gemfile app/ lib/
+
