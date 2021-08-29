@@ -6,6 +6,7 @@ files = [
   ".github/workflows/tests.yml",
   "bin/docker/entrypoints/wait-for-postgres.sh",
   "bin/docker/entrypoints/wait-for-web.sh",
+  "bin/docker/entrypoints/default.sh",
   "bin/docker/prepare-to-start-rails",
   "bin/docker/setup",
   "bin/docker/db_up",

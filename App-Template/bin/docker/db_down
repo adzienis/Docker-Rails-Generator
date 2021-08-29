@@ -2,5 +2,6 @@
 set -e
 
 echo "== Bringing Database Down =="
-docker-compose stop postgres && docker-compose rm postgres
+docker-compose stop postgres || true
+docker-compose rm postgres  || true
 
