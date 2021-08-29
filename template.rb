@@ -8,6 +8,7 @@ files = [
   "bin/docker/entrypoints/wait-for-web.sh",
   "bin/docker/prepare-to-start-rails",
   "bin/docker/setup",
+  "bin/docker/start",
   "bin/docker/yarn",
   "bin/docker/down",
   "config/sidekiq.yml",
