@@ -29,6 +29,8 @@ files.each do |file_path|
   run("chmod +x #{file_path}")
 end
 
+run("echo 'gem \"sidekiq\"' >> Gemfile")
+
 if yes?("Build Docker Environment?")
   run("docker-compose build && docker-compose run --rm web bin/setup")
 
