@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+echo "== Bringing Database Down =="
+docker-compose stop postgres && docker-compose rm postgres
+
