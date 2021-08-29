@@ -7,6 +7,7 @@ files = [
   "bin/docker/entrypoints/wait-for-postgres.sh",
   "bin/docker/entrypoints/wait-for-web.sh",
   "bin/docker/prepare-to-start-rails",
+  "bin/docker/setup",
   "config/cable.yml",
   "config/database.yml",
   ".dockerignore",
