@@ -20,7 +20,8 @@ files = [
   ".dockerignore",
   "docker-compose.ci.yml",
   "docker-compose.yml",
-  "Dockerfile"
+  "Dockerfile",
+  ".env.example"
 ]
 
 files.each do |file_path|
