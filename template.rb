@@ -17,6 +17,7 @@ files = [
 
 files.each do |file_path|
   file file_path, URI.parse("#{base_uri}#{file_path}").open.read
+  run("chmod +x #{file_path}")
 end
 
 if yes?("Build Docker Environment?")
