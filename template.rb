@@ -8,6 +8,8 @@ files = [
   "bin/docker/entrypoints/wait-for-web.sh",
   "bin/docker/prepare-to-start-rails",
   "bin/docker/setup",
+  "bin/docker/yarn",
+  "bin/docker/down",
   "config/cable.yml",
   "config/database.yml",
   ".dockerignore",
