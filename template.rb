@@ -10,6 +10,7 @@ files = [
   "bin/docker/setup",
   "bin/docker/yarn",
   "bin/docker/down",
+  "config/sidekiq.yml",
   "config/cable.yml",
   "config/database.yml",
   ".dockerignore",
