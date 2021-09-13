@@ -116,3 +116,5 @@ RUN RAILS_SERVE_STATIC_FILES=enabled \
       bundle exec rake assets:precompile \
       && bundle exec bootsnap precompile --gemfile app/ lib/
 
+CMD ["./bin/rails", "server", "-b", "0.0.0.0", "-p", "3000"]
+
