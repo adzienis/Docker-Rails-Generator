@@ -19,7 +19,7 @@ FileUtils.chdir APP_ROOT do
   system! "docker-compose pull"
 
   puts "== Building Container =="
-  system! "docker-compose build"
+  system! "docker-compose build --no-cache"
 
   puts "== Installing Libraries =="
   system! "docker-compose run --rm web ./bin/setup"
