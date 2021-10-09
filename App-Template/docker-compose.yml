@@ -35,7 +35,7 @@ x-app: &app
 
 services:
   postgres:
-    image: postgres
+    image: postgres:13
     # Uncomment to access this containers Postgres instance via port 5432
     #ports:
       #- "127.0.0.1:5432:5432"
@@ -54,7 +54,6 @@ services:
     restart: on-failure
     logging:
       driver: none
-
   web:
     <<: *app
     entrypoint: ./bin/docker/entrypoints/wait-for-postgres.sh
@@ -63,7 +62,6 @@ services:
       - "127.0.0.1:3000:3000"
     stdin_open: true
     tty: true
-
   worker:
     <<: *app
     command: bundle exec sidekiq -C config/sidekiq.yml

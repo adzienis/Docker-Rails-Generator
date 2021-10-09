@@ -1,5 +1,5 @@
 FROM ruby:3.0.1 AS builder
-LABEL maintainer="Mike Rogers <me@mikerogers.io>"
+LABEL maintainer="Arthur Dzieniszewski <arthurdzieniszewski@gmail.com> (OG Mike Rogers <me@mikerogers.io>)"
 ARG RAILS_MASTER_KEY
 
 # Dockerize allows us to wait for other containers to be ready before we run our own code.
