@@ -30,6 +30,7 @@ RUN apt-get update && apt-get install -y \
       # Image Resizing
       postgresql-client-13 \
       postgresql-contrib \
+      chromium \
       imagemagick \
       # Nice to have
       bash \
