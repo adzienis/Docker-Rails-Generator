@@ -44,8 +44,10 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     restart: on-failure
+    volumes:
+      - $PWD/init_db.sh:/docker-entrypoint-initdb.d/init_db.sh
   redis:
-    image: redis:6.0.12-alpine
+    image: redis:6.0.12
     volumes:
       - redis:/data:delegated
     # Uncomment to access this containers Redis instance via port 6379

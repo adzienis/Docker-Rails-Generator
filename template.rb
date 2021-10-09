@@ -18,6 +18,7 @@ files = [
   "config/sidekiq.yml",
   "config/cable.yml",
   "config/database.yml",
+  "db/init_db.sh",
   ".dockerignore",
   "docker-compose.ci.yml",
   "docker-compose.yml",

@@ -5,7 +5,7 @@
 #
 # docker-compose -f docker-compose.ci.yml build test
 # docker-compose -f docker-compose.ci.yml run --rm test
-version: '3'
+version: '3.4'
 
 x-ci-app: &ci-app
   build:
@@ -25,7 +25,7 @@ x-ci-app: &ci-app
 
 services:
   postgres:
-    image: postgres:13.2-alpine
+    image: postgres:13
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -35,4 +35,4 @@ services:
 
   test:
     <<: *ci-app
-    command: bash -c "./bin/setup && ./bin/rake assets:precompile && ./bin/bundle exec rspec"
+    command: bash -c "./bin/setup && ./bin/rake assets:precompile && ./bin/bundle exec test:all"
