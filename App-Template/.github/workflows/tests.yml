@@ -9,14 +9,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Pull docker images
         run: |
-          docker pull ruby:3.0.1-alpine --quiet
+          docker pull ruby:3.0.1 --quiet
           docker-compose -f docker-compose.ci.yml pull --quiet
 
       # Cache the docker layers to help speed up the Docker build times.
-      - uses: satackey/action-docker-layer-caching@v0
+      - uses: satackey/action-docker-layer-caching@v0.0.11
         with:
           key: ${{ runner.os }}-docker-${{ hashFiles('**/Dockerfile') }}
           restore-keys: |
